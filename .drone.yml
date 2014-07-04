@@ -19,7 +19,6 @@ image: amos6224/namely.3
  19   email:
  20     recipients:
  21       - jeff@namely.com
- 22       - brett@namely.com
  23
  24  webhook:
  25     on_success: true

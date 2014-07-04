@@ -5,11 +5,6 @@ image: amos6224/postqresl9.2
   5   - apt-get install -y nginx
   6   - apt-get install -y htop
   7   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libs>
-  8   - gem install execjs
-  9   - cd /tmp
- 10   - rails new namely
- 11   - cd namely
- 12   - bundle install
  13
  14 service:
  15   - redis

@@ -1,0 +1,35 @@
+image: amos6224/namely.3
+  2 script:
+  3   - apt-get -y update
+  4   - apt-get install -y git
+  5   - apt-get install -y nginx
+  6   - apt-get install -y htop
+  7   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libs>
+  8   - gem install execjs
+  9   - cd /tmp
+ 10   - rails new namely
+ 11   - cd namely
+ 12   - bundle install
+ 13
+ 14 service:
+ 15   - redis
+ 16   - postgres
+ 17
+ 18 notify:
+ 19   email:
+ 20     recipients:
+ 21       - jeff@namely.com
+ 22       - brett@namely.com
+ 23
+ 24  webhook:
+ 25     on_success: true
+ 26     on_failure: true
+ 27     urls:
+ 28       - http://www.namely.com:3000
+ 29
+ 30   hipchat:
+ 31     room: CI
+ 32     token: {{hipchat_token}}
+ 33     on_started: true
+ 34     on_success: true
+ 35     on_failure: true

@@ -1,4 +1,4 @@
-image: amos6224/namely.3
+image: amos6224/postqresl9.2
   2 script:
   3   - apt-get -y update
   4   - apt-get install -y git

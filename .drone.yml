@@ -1,3 +1,28 @@
-image: amos6224/namely.4
+image: amos6224/atila.1
 script:
-   - docker build -t {{ .Owner }}/{{ .Name }} .
+  - /etc/init.d/postgresql start
+  - /etc/init.d/redis_6379 start
+  - sudo -u postgres createuser -s -d  namely_test
+  - createdb -U namely_test namely_test
+  - /etc/init.d/postgresql reload
+  - apt-get update
+  - apt-get install -y git
+  - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev
+  - cp config/database.drone.yml config/database.yml
+  - cp .env.example .env
+  - bundle install
+  - RAILS_ENV=test bundle exec rake db:test:load
+  - RAILS_ENV=test bundle exec rspec spec
+
+notify:
+  email:
+    recipients:
+      - jeff@namely.com
+   
+
+  hipchat:
+    room: CI
+    token: {{hipchat_token}}
+    on_started: true
+    on_success: true
+    on_failure: true
